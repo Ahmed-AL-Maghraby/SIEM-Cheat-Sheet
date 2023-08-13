@@ -38,8 +38,8 @@ Certainly, here is a comprehensive list of 100 famous Splunk SPL commands, divid
 | ------- | ----------- | ------- |
 | where |  Filters events based on conditions | ``index=logs \| where status="error"`` |
 | eval | Creates new fields or modifies existing ones | ``index=logs \| eval latency_ms=response_time/1000 \| table latency_ms`` |
-| rex | Performs regular expression extraction on fields | index=logs \| rex field=message "Error: (?<error_message>.*)" |
-| erex | Enhanced regular expression extraction with named capture groups | index=logs \| erex "Error: (?<error_message>.*)" |
+| rex | Performs regular expression extraction on fields | ``index=logs \| rex field=message "Error: (?<error_message>.*)" |
+| erex | Enhanced regular expression extraction with named capture groups | ``index=logs \| erex "Error: (?<error_message>.*)"`` |
 
 
 <br/>
