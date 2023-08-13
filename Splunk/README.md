@@ -1,48 +1,48 @@
 Certainly, here is a comprehensive list of 100 famous Splunk SPL commands, divided into categories, along with explanations and examples for each category:
 
+| Command | Description | Example |
+| ------- | ----------- | ------- |
+| ------- | ----------- | ------- |
+| ------- | ----------- | ------- |
+
 # Table of contents 
    
-   |Table of contents|
-   | -- |
-   |[Teast]()|
+|Table of contents|
+| -- |
+|[   ]()|
+|[   ]()|
+|[   ]()|
+|[   ]()|
+|[   ]()|
+|[   ]()|
+|[   ]()|
+|[   ]()|
+|[   ]()|
 
----
 
-### **Basic Commands:**
+-------------------------------
 
-1. **search**
-   - Description: Initiates a search for events based on specified criteria.
-   - Example: `index=web_logs status=200`
+## Basic Commands:
 
-2. **index**
-   - Description: Specifies the index to search within.
-   - Example: `index=web_logs`
+| Command | Description | Example |
+| ------- | ----------- | ------- |
+| search | Initiates a search for events based on specified criteria | ``index=web_logs status=200`` |
+| index | Specifies the index to search within | ``index=web_logs`` |
+| sourcetype | Filters events based on the specified sourcetype | ``sourcetype=apache_access`` |
 
-3. **sourcetype**
-   - Description: Filters events based on the specified sourcetype.
-   - Example: `sourcetype=apache_access`
+<br/>
 
----
+## Filtering and Extraction
 
-### **Filtering and Extraction:**
+| Command | Description | Example |
+| ------- | ----------- | ------- |
+| where |  Filters events based on conditions | ``index=logs \| where status="error"`` |
+| eval | Creates new fields or modifies existing ones | ``index=logs \| eval latency_ms=response_time/1000 \| table latency_ms`` |
+| rex | Performs regular expression extraction on fields | index=logs | rex field=message "Error: (?<error_message>.*)" |
+| erex | Enhanced regular expression extraction with named capture groups | index=logs | erex "Error: (?<error_message>.*)" |
 
-4. **where**
-   - Description: Filters events based on conditions.
-   - Example: `index=logs | where status="error"`
 
-5. **eval**
-   - Description: Creates new fields or modifies existing ones.
-   - Example: `index=logs | eval latency_ms=response_time/1000`
-
-6. **rex**
-   - Description: Performs regular expression extraction on fields.
-   - Example: `index=logs | rex field=message "Error: (?<error_message>.*)"`
-
-7. **erex**
-   - Description: Enhanced regular expression extraction with named capture groups.
-   - Example: `index=logs | erex "Error: (?<error_message>.*)"`
-
----
+<br/>
 
 ### **Aggregation and Statistics:**
 
