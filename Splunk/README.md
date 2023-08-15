@@ -1,3 +1,9 @@
+<p align="center">
+<img src="https://logos-world.net/wp-content/uploads/2022/11/Splunk-Emblem.png" alt="splunk" height="300" >
+</p>
+
+<h1 align="center">Top 100 Splunk Commands</h1>
+
 Certainly, here is a comprehensive list of 100 famous Splunk SPL commands, divided into categories, along with explanations and examples for each category:
 
 
@@ -34,9 +40,10 @@ Certainly, here is a comprehensive list of 100 famous Splunk SPL commands, divid
 |[Advanced Analysis and Correlation](https://github.com/Ahmed-AL-Maghraby/SIEM-Cheat-Sheet/blob/main/Splunk/README.md#advanced-analysis-and-correlation)|
 
 
+<h1 align="center">splunk Cheat Sheet</h1>
 
 
--------------------------------
+
 
 ## Basic Commands
 
