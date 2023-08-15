@@ -1,3 +1,4 @@
+
 <p align="center">
 <img src="https://logos-world.net/wp-content/uploads/2022/11/Splunk-Emblem.png" alt="splunk" height="300" >
 </p>
@@ -12,32 +13,32 @@ Certainly, here is a comprehensive list of 100 famous Splunk SPL commands, divid
    
 |Table of contents|
 | -- |
-|[Basic Commands](https://github.com/Ahmed-AL-Maghraby/SIEM-Cheat-Sheet/blob/main/Splunk/README.md#basic-commands)|
-|[Filtering and Extraction](https://github.com/Ahmed-AL-Maghraby/SIEM-Cheat-Sheet/blob/main/Splunk/README.md#filtering-and-extraction)|
-|[Aggregation and Statistics](https://github.com/Ahmed-AL-Maghraby/SIEM-Cheat-Sheet/blob/main/Splunk/README.md#aggregation-and-statistics)|
-|[Grouping and Transactional Analysis](https://github.com/Ahmed-AL-Maghraby/SIEM-Cheat-Sheet/blob/main/Splunk/README.md#grouping-and-transactional-analysis)|
-|[Field Manipulation](https://github.com/Ahmed-AL-Maghraby/SIEM-Cheat-Sheet/blob/main/Splunk/README.md#field-manipulation)|
-|[Data Transformation](https://github.com/Ahmed-AL-Maghraby/SIEM-Cheat-Sheet/blob/main/Splunk/README.md#data-transformation)|
-|[Lookup and Enrichment](https://github.com/Ahmed-AL-Maghraby/SIEM-Cheat-Sheet/blob/main/Splunk/README.md#lookup-and-enrichment)|
-|[Advanced Analysis](https://github.com/Ahmed-AL-Maghraby/SIEM-Cheat-Sheet/blob/main/Splunk/README.md#advanced-analysis)|
-|[Subsearch and Correlation](https://github.com/Ahmed-AL-Maghraby/SIEM-Cheat-Sheet/blob/main/Splunk/README.md#subsearch-and-correlation)|
-|[Visualization and Reporting](https://github.com/Ahmed-AL-Maghraby/SIEM-Cheat-Sheet/blob/main/Splunk/README.md#visualization-and-reporting)|
-|[Alerting and Monitoring](https://github.com/Ahmed-AL-Maghraby/SIEM-Cheat-Sheet/blob/main/Splunk/README.md#alerting-and-monitoring)|
-|[Batch Mode and Lookup](https://github.com/Ahmed-AL-Maghraby/SIEM-Cheat-Sheet/blob/main/Splunk/README.md#batch-mode-and-lookup)|
-|[Working with Time](https://github.com/Ahmed-AL-Maghraby/SIEM-Cheat-Sheet/blob/main/Splunk/README.md#working-with-time)|
-|[String Functions](https://github.com/Ahmed-AL-Maghraby/SIEM-Cheat-Sheet/blob/main/Splunk/README.md#string-functions)|
-|[Math Functions](https://github.com/Ahmed-AL-Maghraby/SIEM-Cheat-Sheet/blob/main/Splunk/README.md#math-functions)|
-|[Conditional Functions](https://github.com/Ahmed-AL-Maghraby/SIEM-Cheat-Sheet/blob/main/Splunk/README.md#conditional-functions)|
-|[Logical Functions](https://github.com/Ahmed-AL-Maghraby/SIEM-Cheat-Sheet/blob/main/Splunk/README.md#logical-functions)|
-|[Working with Multivalue Fields](https://github.com/Ahmed-AL-Maghraby/SIEM-Cheat-Sheet/blob/main/Splunk/README.md#working-with-multivalue-fields)|
-|[Numeric Functions](https://github.com/Ahmed-AL-Maghraby/SIEM-Cheat-Sheet/blob/main/Splunk/README.md#numeric-functions)|
-|[Time and Date Functions](https://github.com/Ahmed-AL-Maghraby/SIEM-Cheat-Sheet/blob/main/Splunk/README.md#time-and-date-functions)|
-|[IP and Geolocation Functions](https://github.com/Ahmed-AL-Maghraby/SIEM-Cheat-Sheet/blob/main/Splunk/README.md#ip-and-geolocation-functions)|
-|[Geospatial Functions](https://github.com/Ahmed-AL-Maghraby/SIEM-Cheat-Sheet/blob/main/Splunk/README.md#geospatial-functions)|
-|[Advanced Transformations](https://github.com/Ahmed-AL-Maghraby/SIEM-Cheat-Sheet/blob/main/Splunk/README.md#advanced-transformations)|
-|[Conditional Transformations](https://github.com/Ahmed-AL-Maghraby/SIEM-Cheat-Sheet/blob/main/Splunk/README.md#conditional-transformations)|
-|[Timechart and Chart Functions](https://github.com/Ahmed-AL-Maghraby/SIEM-Cheat-Sheet/blob/main/Splunk/README.md#timechart-and-chart-functions)|
-|[Advanced Analysis and Correlation](https://github.com/Ahmed-AL-Maghraby/SIEM-Cheat-Sheet/blob/main/Splunk/README.md#advanced-analysis-and-correlation)|
+|[Basic Commands](https://github.com/Ahmed-AL-Maghraby/SIEM-Cheat-Sheet/blob/main/Splunk-Cheat-Sheet/README.md#basic-commands)|
+|[Filtering and Extraction](https://github.com/Ahmed-AL-Maghraby/SIEM-Cheat-Sheet/blob/main/Splunk-Cheat-Sheet/README.md#filtering-and-extraction)|
+|[Aggregation and Statistics](https://github.com/Ahmed-AL-Maghraby/SIEM-Cheat-Sheet/blob/main/Splunk-Cheat-Sheet/README.md#aggregation-and-statistics)|
+|[Grouping and Transactional Analysis](https://github.com/Ahmed-AL-Maghraby/SIEM-Cheat-Sheet/blob/main/Splunk-Cheat-Sheet/README.md#grouping-and-transactional-analysis)|
+|[Field Manipulation](https://github.com/Ahmed-AL-Maghraby/SIEM-Cheat-Sheet/blob/main/Splunk-Cheat-Sheet/README.md#field-manipulation)|
+|[Data Transformation](https://github.com/Ahmed-AL-Maghraby/SIEM-Cheat-Sheet/blob/main/Splunk-Cheat-Sheet/README.md#data-transformation)|
+|[Lookup and Enrichment](https://github.com/Ahmed-AL-Maghraby/SIEM-Cheat-Sheet/blob/main/Splunk-Cheat-Sheet/README.md#lookup-and-enrichment)|
+|[Advanced Analysis](https://github.com/Ahmed-AL-Maghraby/SIEM-Cheat-Sheet/blob/main/Splunk-Cheat-Sheet/README.md#advanced-analysis)|
+|[Subsearch and Correlation](https://github.com/Ahmed-AL-Maghraby/SIEM-Cheat-Sheet/blob/main/Splunk-Cheat-Sheet/README.md#subsearch-and-correlation)|
+|[Visualization and Reporting](https://github.com/Ahmed-AL-Maghraby/SIEM-Cheat-Sheet/blob/main/Splunk-Cheat-Sheet/README.md#visualization-and-reporting)|
+|[Alerting and Monitoring](https://github.com/Ahmed-AL-Maghraby/SIEM-Cheat-Sheet/blob/main/Splunk-Cheat-Sheet/README.md#alerting-and-monitoring)|
+|[Batch Mode and Lookup](https://github.com/Ahmed-AL-Maghraby/SIEM-Cheat-Sheet/blob/main/Splunk-Cheat-Sheet/README.md#batch-mode-and-lookup)|
+|[Working with Time](https://github.com/Ahmed-AL-Maghraby/SIEM-Cheat-Sheet/blob/main/Splunk-Cheat-Sheet/README.md#working-with-time)|
+|[String Functions](https://github.com/Ahmed-AL-Maghraby/SIEM-Cheat-Sheet/blob/main/Splunk-Cheat-Sheet/README.md#string-functions)|
+|[Math Functions](https://github.com/Ahmed-AL-Maghraby/SIEM-Cheat-Sheet/blob/main/Splunk-Cheat-Sheet/README.md#math-functions)|
+|[Conditional Functions](https://github.com/Ahmed-AL-Maghraby/SIEM-Cheat-Sheet/blob/main/Splunk-Cheat-Sheet/README.md#conditional-functions)|
+|[Logical Functions](https://github.com/Ahmed-AL-Maghraby/SIEM-Cheat-Sheet/blob/main/Splunk-Cheat-Sheet/README.md#logical-functions)|
+|[Working with Multivalue Fields](https://github.com/Ahmed-AL-Maghraby/SIEM-Cheat-Sheet/blob/main/Splunk-Cheat-Sheet/README.md#working-with-multivalue-fields)|
+|[Numeric Functions](https://github.com/Ahmed-AL-Maghraby/SIEM-Cheat-Sheet/blob/main/Splunk-Cheat-Sheet/README.md#numeric-functions)|
+|[Time and Date Functions](https://github.com/Ahmed-AL-Maghraby/SIEM-Cheat-Sheet/blob/main/Splunk-Cheat-Sheet/README.md#time-and-date-functions)|
+|[IP and Geolocation Functions](https://github.com/Ahmed-AL-Maghraby/SIEM-Cheat-Sheet/blob/main/Splunk-Cheat-Sheet/README.md#ip-and-geolocation-functions)|
+|[Geospatial Functions](https://github.com/Ahmed-AL-Maghraby/SIEM-Cheat-Sheet/blob/main/Splunk-Cheat-Sheet/README.md#geospatial-functions)|
+|[Advanced Transformations](https://github.com/Ahmed-AL-Maghraby/SIEM-Cheat-Sheet/blob/main/Splunk-Cheat-Sheet/README.md#advanced-transformations)|
+|[Conditional Transformations](https://github.com/Ahmed-AL-Maghraby/SIEM-Cheat-Sheet/blob/main/Splunk-Cheat-Sheet/README.md#conditional-transformations)|
+|[Timechart and Chart Functions](https://github.com/Ahmed-AL-Maghraby/SIEM-Cheat-Sheet/blob/main/Splunk-Cheat-Sheet/README.md#timechart-and-chart-functions)|
+|[Advanced Analysis and Correlation](https://github.com/Ahmed-AL-Maghraby/SIEM-Cheat-Sheet/blob/main/Splunk-Cheat-Sheet/README.md#advanced-analysis-and-correlation)|
 
 
 <h1 align="center">splunk Cheat Sheet</h1>
