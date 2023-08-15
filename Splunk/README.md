@@ -19,7 +19,7 @@ Certainly, here is a comprehensive list of 100 famous Splunk SPL commands, divid
 
 -------------------------------
 
-## Basic Commands:
+## Basic Commands
 
 | Command | Description | Example |
 | ------- | ----------- | ------- |
