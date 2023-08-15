@@ -1,9 +1,6 @@
 Certainly, here is a comprehensive list of 100 famous Splunk SPL commands, divided into categories, along with explanations and examples for each category:
 
-| Command | Description | Example |
-| ------- | ----------- | ------- |
-| ------- | ----------- | ------- |
-| ------- | ----------- | ------- |
+
 
 # Table of contents 
    
@@ -41,497 +38,299 @@ Certainly, here is a comprehensive list of 100 famous Splunk SPL commands, divid
 | rex | Performs regular expression extraction on fields | ``index=logs \| rex field=message "Error: (?<error_message>.*)"`` |
 | erex | Enhanced regular expression extraction with named capture groups | ``index=logs \| erex "Error: (?<error_message>.*)"`` |
 
+<br/>
+
+
+## Aggregation and Statistics
+
+
+| Command | Description | Description |
+| ------- | ----------- | ----------- |
+| stats | Generates statistics and calculations on fields | ``index=sales \| stats sum(price) as total_sales by product`` |
+| timechart | Creates time-based charts and aggregates data over time | ``index=web_logs \| timechart count by status`` |
+| chart | Generates charts and graphs based on specified fields | ``index=web_logs \| chart avg(response_time) by uri`` |
+| eventstats | Performs statistics calculations on events and adds results as new fields | ``index=transactions \| eventstats avg(amount) as avg_amount by user`` |
 
 <br/>
 
-### **Aggregation and Statistics:**
+## Grouping and Transactional Analysis
+ 
+| Command | Description | Description |
+| ------- | ----------- | ----------- |
+| transaction | Groups related events into transactions based on conditions | ``index=transactions \| transaction user startswith="login" endswith="logout"`` |
+| stats count by | Counts occurrences of unique values in a field | ``index=web_logs \| stats count by status`` |
+| stats earliest, latest by | Retrieves the earliest and latest events for each value in a field | ``index=logs \| stats earliest(_time) as first_event latest(_time) as last_event by user`` |
 
-8. **stats**
-   - Description: Generates statistics and calculations on fields.
-   - Example: `index=sales | stats sum(price) as total_sales by product`
+<br/>
 
-9. **timechart**
-   - Description: Creates time-based charts and aggregates data over time.
-   - Example: `index=web_logs | timechart count by status`
 
-10. **chart**
-    - Description: Generates charts and graphs based on specified fields.
-    - Example: `index=web_logs | chart avg(response_time) by uri`
+## Field Manipulation
 
-11. **eventstats**
-    - Description: Performs statistics calculations on events and adds results as new fields.
-    - Example: `index=transactions | eventstats avg(amount) as avg_amount by user`
+| Command | Description | Description |
+| ------- | ----------- | ----------- |
+| fields | Specifies fields to be included in the search results | ``index=logs \| fields timestamp, source, message`` |
+| rename | Renames fields in the search results | ``index=logs \| rename old_field as new_field`` |
+| fieldformat | Applies formatting to field values in search results | ``index=metrics \| eval formatted_latency = fieldformat(response_time, "duration")`` |
+| addcoltotals | Adds row and column totals to tabular search results | ``index=sales \| addcoltotals useother=f sum(price) as total_price`` |
 
----
+<br/>
 
-### **Grouping and Transactional Analysis:**
 
-12. **transaction**
-    - Description: Groups related events into transactions based on conditions.
-    - Example: `index=transactions | transaction user startswith="login" endswith="logout"`
 
-13. **stats count by**
-    - Description: Counts occurrences of unique values in a field.
-    - Example: `index=web_logs | stats count by status`
+## Data Transformation
 
-14. **stats earliest, latest by**
-    - Description: Retrieves the earliest and latest events for each value in a field.
-    - Example: `index=logs | stats earliest(_time) as first_event latest(_time) as last_event by user`
+| Command | Description | Description |
+| ------- | ----------- | ----------- |
+| rex mode=sed | Applies sed-like replacements using regular expressions | ``index=logs \| rex mode=sed field=description "s/error/warning/g"`` |
+| spath | Extracts structured data from fields containing JSON or XML | ``index=logs \| spath input=raw output=uri path=uri`` |
+| spath output path | Extracts specific paths from structured data as separate fields | ``index=logs \| spath input=raw output=page path=uri`` |
+| spath input path output path default | Extracts structured data with default values if path is not found | ``index=logs \| spath input=raw output=page path=uri default="Unknown"`` |
 
----
+<br/>
 
-### **Field Manipulation:**
 
-15. **fields**
-    - Description: Specifies fields to be included in the search results.
-    - Example: `index=logs | fields timestamp, source, message`
+## Lookup and Enrichment
 
-16. **rename**
-    - Description: Renames fields in the search results.
-    - Example: `index=logs | rename old_field as new_field`
+| Command | Description | Description |
+| ------- | ----------- | ----------- |
+| lookup | Enhances data with additional information from lookup tables | ``index=logs \| lookup user_info.csv username as user`` |
+| inputlookup | Loads lookup data into a search | ``\| inputlookup user_info.csv`` |
+| outputlookup | Saves search results into a lookup file | ``index=logs \| stats count by user \| outputlookup user_counts.csv`` |
 
-17. **fieldformat**
-    - Description: Applies formatting to field values in search results.
-    - Example: `index=metrics | eval formatted_latency = fieldformat(response_time, "duration")`
 
-18. **addcoltotals**
-    - Description: Adds row and column totals to tabular search results.
-    - Example: `index=sales | addcoltotals useother=f sum(price) as total_price`
 
----
 
-### **Data Transformation:**
 
-19. **rex mode=sed**
-    - Description: Applies sed-like replacements using regular expressions.
-    - Example: `index=logs | rex mode=sed field=description "s/error/warning/g"`
+<br/>
 
-20. **spath**
-    - Description: Extracts structured data from fields containing JSON or XML.
-    - Example: `index=logs | spath input=raw output=uri path=uri`
+##  Advanced Analysis
 
-21. **spath output path**
-    - Description: Extracts specific paths from structured data as separate fields.
-    - Example: `index=logs | spath input=raw output=page path=uri`
+| Command | Description | Description |
+| ------- | ----------- | ----------- |
+| eval case() |  Performs conditional evaluation | ``index=logs \| eval priority = case(severity=="High", "Urgent", severity=="Medium", "Normal", true(), "Low")`` |
+| eval coalesce() |  Returns the first non-null value among arguments | ``index=logs \| eval important_info = coalesce(critical_message, warning_message, info_message)`` |
+| eval round() |  Rounds a numeric field to a specified number of decimal places | ``index=metrics \| eval rounded_value = round(value, 2)`` |
+| eval mvjoin() |  Joins multivalue fields into a single value using a separator | ``index=events \| eval combined_tags = mvjoin(tags, ", ")`` |
+| eval strftime() |  Converts a Unix timestamp to a human-readable date and time format | ``index=logs \| eval formatted_time = strftime(_time, "%Y-%m-%d %H:%M:%S")`` |
 
-22. **spath input path output path default**
-    - Description: Extracts structured data with default values if path is not found.
-    - Example: `index=logs | spath input=raw output=page path=uri default="Unknown"`
+<br/>
 
----
+##  Subsearch and Correlation
 
-### **Lookup and Enrichment:**
+| Command | Description | Description |
+| ------- | ----------- | ----------- |
+| subsearch |  Embeds a subsearch within the main search to correlate events | ``index=access_logs [ search index=error_logs \| stats count ]`` |
+| tstats |  Accelerated statistics command for summarizing indexed data | ``\| tstats count where index=web_logs by sourcetype`` |
 
-23. **lookup**
-    - Description: Enhances data with additional information from lookup tables.
-    - Example: `index=logs | lookup user_info.csv username as user`
+<br/>
 
-24. **inputlookup**
-    - Description: Loads lookup data into a search.
-    - Example: `| inputlookup user_info.csv`
+## Visualization and Reporting
 
-25. **outputlookup**
-    - Description: Saves search results into a lookup file.
-    - Example: `index=logs | stats count by user | outputlookup user_counts.csv`
+| Command | Description | Description |
+| ------- | ----------- | ----------- |
+| timechart span |  Creates time-based charts with specified time spans | ``index=web_logs \| timechart span=1h sum(response_time)`` |
+| geostats |  Generates geospatial statistics and visualizations | ``index=locations \| geostats count by city`` |
+| chart usenull |  Includes NULL values in chart visualizations | ``index=logs \| chart count by user usenull=f`` |
+| rangemap |  Maps field values to ranges for reporting | ``index=sales \| rangemap price output_field=price_range`` |
+| xyseries |  Generates XY chart visualizations from multivalue fields | ``index=metrics \| xyseries x=time y=values`` |
 
----
+<br/>
 
-### **Advanced Analysis:**
+## Alerting and Monitoring
 
-26. **eval case()**
-    - Description: Performs conditional evaluation.
-    - Example: `index=logs | eval priority = case(severity=="High", "Urgent", severity=="Medium", "Normal", true(), "Low")`
+| Command | Description | Description |
+| ------- | ----------- | ----------- |
+| alert |  Sets up alerts based on specified conditions | ``index=errors \| stats count as error_count \| alert threshold=100 "High Error Count"`` |
+| collect |  Aggregates and stores events for future analysis | ``index=access_logs \| collect index=access_history`` |
+| track_alert |  Tracks alert activity and results | ``index=_audit action="alert_fired" \| stats count by alert`` |
 
-27. **eval coalesce()**
-    - Description: Returns the first non-null value among arguments.
-    - Example: `index=logs | eval important_info = coalesce(critical_message, warning_message, info_message)`
+<br/>
 
-28. **eval round()**
-    - Description: Rounds a numeric field to a specified number of decimal places.
-    - Example: `index=metrics | eval rounded_value = round(value, 2)`
+## Batch Mode and Lookup
 
-29. **eval mvjoin()**
-    - Description: Joins multivalue fields into a single value using a separator.
-    - Example: `index=events | eval combined_tags = mvjoin(tags, ", ")`
+| Command | Description | Description |
+| ------- | ----------- | ----------- |
+| multisearch |  Runs multiple searches in parallel | `` \| multisearch [ search index=logs ] [ search index=metrics ]`` |
+| multisearch SID |  Searches in parallel with session ID | `` \| multisearch SID=search1 [ search index=logs ] [ search index=metrics ]`` |
+| inputcsv |  Loads data from a CSV file into the search | `` \| inputcsv data.csv`` |
+| inputlookup append=t |  Appends data from a lookup table to the search results | ``index=logs \| inputlookup append=t lookup_table.csv`` |
 
-30. **eval strftime()**
-    - Description: Converts a Unix timestamp to a human-readable date and time format.
-    - Example: `index=logs | eval formatted_time = strftime(_time, "%Y-%m-%d %H:%M:%S")`
+<br/>
 
----
+## Working with Time
 
-### **Subsearch and Correlation:**
+| Command | Description | Description |
+| ------- | ----------- | ----------- |
+| strptime |  Converts a string to a timestamp format | ``index=logs \| eval event_time = strptime(timestamp, "%Y-%m-%d %H:%M:%S")`` |
+| earliest latest |  Specifies time ranges for the search | ``index=logs earliest=-7d latest=now`` |
+| bucket |  Groups events into time buckets | ``index=logs \| bucket span=1h _time`` |
 
-31. **subsearch**
-    - Description: Embeds a subsearch within the main search to correlate events.
-    - Example: `index=access_logs [ search index=error_logs | stats count ]`
+<br/>
 
-32. **tstats**
-    - Description: Accelerated statistics command for summarizing indexed data.
-    - Example: `| tstats count where index=web_logs by sourcetype`
+## String Functions
 
----
+| Command | Description | Description |
+| ------- | ----------- | ----------- |
+| substr |  Extracts a substring from a field's value | ``index=logs \| eval short_message = substr(message, 1, 50) `` |
+| len |  Returns the length of a string field | ``index=logs \| eval message_length = len(message)`` |
+| toupper tolower |  Converts string values to uppercase or lowercase | ``index=logs \| eval uppercase_message = toupper(message)`` |
 
-### **Visualization and Reporting:**
+<br/>
 
-33. **timechart span**
-    - Description: Creates time-based charts with specified time spans.
-    - Example: `index=web_logs | timechart span=1h sum(response_time)`
+## Math Functions
 
-34. **geostats**
-    - Description: Generates geospatial statistics and visualizations.
-    - Example: `index=locations | geostats count by city`
+| Command | Description | Description |
+| ------- | ----------- | ----------- |
+| round |  Rounds numeric values to the nearest whole number | ``index=metrics \| eval rounded_value = round(value)`` |
+| abs |  Returns the absolute value of a number | ``index=metrics \| eval absolute_value = abs(change) `` |
+| sqrt |  Calculates the square root of a number | ``index=metrics \| eval square_root = sqrt(number) `` |
+| power |  Raises a number to a specified power | ``index=metrics \| eval squared_value = power(value, 2) `` |
+| log log10 |  Computes the natural logarithm or base-10 logarithm | ``index=metrics \| eval ln_value = log(value) `` |
 
-35. **chart usenull**
-    - Description: Includes NULL values in chart visualizations.
-    - Example: `index=logs | chart count by user usenull=f`
+<br/>
 
-36. **rangemap**
-    - Description: Maps field values to ranges for reporting.
-    - Example: `index=sales | rangemap price output_field=price_range`
+## Conditional Functions
 
+| Command | Description | Description |
+| ------- | ----------- | ----------- |
+| if() |  Returns different values based on a condition | ``index=logs \| eval status_type = if(status>=400, "Error", "Success")`` |
+| case() |  Evaluates a series of conditions and returns values accordingly | ``index=logs \| eval severity_level = case(severity=="High", 3, severity=="Medium", 2, severity=="Low", 1)`` |
+| coalesce() |  Returns the first non-null value among arguments | ``index=logs \n| eval important_info = coalesce(critical_message, warning_message, info_message)`` |
 
+<br/>
 
-37. **xyseries**
-    - Description: Generates XY chart visualizations from multivalue fields.
-    - Example: `index=metrics | xyseries x=time y=values`
+## Logical Functions
 
----
+| Command | Description | Description |
+| ------- | ----------- | ----------- |
+| and or not |  Performs logical AND, OR, and NOT operations | ``index=logs \| eval is_error = (severity=="High" OR status>=500)`` |
+| eval like |  Matches field values with wildcard patterns | ``index=logs \| eval is_error = like(message, "*error*")`` |
+| mvfilter |  Filters multivalue fields based on conditions | ``index=events \| eval tags = mvfilter(tag, like(tag, "*critical*"))`` |
 
-### **Alerting and Monitoring:**
+<br/>
 
-38. **alert**
-    - Description: Sets up alerts based on specified conditions.
-    - Example: `index=errors | stats count as error_count | alert threshold=100 "High Error Count"`
+## Working with Multivalue Fields
 
-39. **collect**
-    - Description: Aggregates and stores events for future analysis.
-    - Example: `index=access_logs | collect index=access_history`
+| Command | Description | Description |
+| ------- | ----------- | ----------- |
+| mvexpand |  Expands multivalue fields into separate events | ``index=events \| mvexpand tags`` |
+| mvzip mvappend mvcombine |  Manipulates multivalue fields | ``index=events \| eval combined_fields = mvzip(field1, field2, ", ")`` |
+| mvcount |  Counts the number of values in a multivalue field | ``index=events \| eval tag_count = mvcount(tags)`` |
+| mvfind |  Searches for values in a multivalue field | ``index=events \| eval has_error = mvfind(tags, "error")`` |
 
-40. **track_alert**
-    - Description: Tracks alert activity and results.
-    - Example: `index=_audit action="alert_fired" | stats count by alert`
+<br/>
 
----
+## Numeric Functions
 
-### **Batch Mode and Lookup:**
+| Command | Description | Description |
+| ------- | ----------- | ----------- |
+| isnull isnotnull |  Checks if a field value is null or not null | ``index=metrics \| eval missing_value = isnull(response_time)`` |
+| isnum |  Checks if a field value is a number | ``index=metrics \| eval is_number = isnum(value)`` |
+| isbool |  Checks if a field value is a boolean | ``index=events \| eval is_boolean = isbool(flag)`` |
+| mvjoin | Joins multivalue fields into a single value using a separator | ``index=events \| eval combined_tags = mvjoin(tags, ", ")`` |
 
-41. **multisearch**
-    - Description: Runs multiple searches in parallel.
-    - Example: `| multisearch [ search index=logs ] [ search index=metrics ]`
+<br/>
 
-42. **multisearch SID**
-    - Description: Searches in parallel with session ID.
-    - Example: `| multisearch SID=search1 [ search index=logs ] [ search index=metrics ]`
+## Time and Date Functions
 
-43. **inputcsv**
-    - Description: Loads data from a CSV file into the search.
-    - Example: `| inputcsv data.csv`
+| Command | Description | Description |
+| ------- | ----------- | ----------- |
+| now |  Returns the current date and time | ``index=logs \| eval current_time = now()`` |
+| strptime strftime |  Converts between Unix timestamps and human-readable dates | ``index=logs \| eval formatted_time = strftime(_time, "%Y-%m-%d %H:%M:%S")`` |
+| relative_time |  Calculates a relative time based on a unit and offset | ``index=logs earliest=relative_time(now(), "-1d@d")`` |
+| date_month date_wday |  Extracts month or day of the week from timestamps | ``index=logs \| eval month = date_month(_time)`` |
+| now offset |  Returns the current time with an offset | ``index=logs \| eval future_time = now() + 3600`` |
+| time |  Converts a string representation of time to a Unix timestamp | ``index=logs \| eval event_time = time("2023-01-15 10:30:00")`` |
+| date_part |  Extracts specific components (year, month, day, etc.) from a timestamp | ``index=logs \| eval year = date_part(_time, "year")`` |
 
-44. **inputlookup append=t**
-    - Description: Appends data from a lookup table to the search results.
-    - Example: `index=logs | inputlookup append=t lookup_table.csv`
+<br/>
 
----
+## IP and Geolocation Functions
 
-### **Working with Time:**
+| Command | Description | Description |
+| ------- | ----------- | ----------- |
+| iplocation |  Retrieves geolocation information for IP addresses | ``index=logs \| iplocation clientip`` |
+| cidrmatch |  Matches IP addresses against CIDR ranges | ``index=network_traffic \| cidrmatch(ip, "192.168.0.0/24")`` |
+| isipv4 isipv6 |  Checks if a field value is an IPv4 or IPv6 address | ``index=logs \| eval is_ipv4 = isipv4(ip_address)`` |
+| maxmindisplocation |  Retrieves geolocation information from MaxMind databases | ``index=logs \| maxmindisplocation ipfield=client_ip`` |
+| iptoname |  Maps IP addresses to domain names | ``index=network_traffic \| eval hostname = iptoname(destination_ip)`` |
 
-45. **strptime**
-    - Description: Converts a string to a timestamp format.
-    - Example: `index=logs | eval event_time = strptime(timestamp, "%Y-%m-%d %H:%M:%S")`
+<br/>
 
-46. **earliest latest**
-    - Description: Specifies time ranges for the search.
-    - Example: `index=logs earliest=-7d latest=now`
+## Geospatial Functions
 
-47. **bucket**
-    - Description: Groups events into time buckets.
-    - Example: `index=logs | bucket span=1h _time`
+| Command | Description | Description |
+| ------- | ----------- | ----------- |
+| geostats |  Generates geospatial statistics and visualizations | ``index=locations \| geostats count by city`` |
+| geodistance |  Calculates the distance between two sets of geographic coordinates | ``index=locations \| eval distance_km = geodistance(lat1, lon1, lat2, lon2, "km")`` |
+| geobounds |  Calculates the bounding box of a set of geographic coordinates | ``index=locations \| geobounds latfield=latitude lonfield=longitude`` |
+| geopoint |  Converts latitude and longitude to a geopoint field | ``index=locations \| eval geopoint = geopoint(latitude, longitude)`` |
+| geom distance |  Calculates the distance between two geopoint fields | ``index=locations \| eval distance_km = geom_distance(geopoint1, geopoint2, "km")`` |
 
----
+<br/>
 
-### **String Functions:**
+## Advanced Transformations
 
-48. **substr**
-    - Description: Extracts a substring from a field's value.
-    - Example: `index=logs | eval short_message = substr(message, 1, 50)`
+| Command | Description | Description |
+| ------- | ----------- | ----------- |
+| spath |  Extracts structured data from fields containing JSON or XML | ``index=logs \| spath input=raw output=uri path=uri`` |
+| spath output path |  Extracts specific paths from structured data as separate fields | ``index=logs \| spath input=raw output=page path=uri`` |
+| spath output default |  Extracts structured data with default values if path is not found | ``index=logs \| spath input=raw output=page path=uri default="Unknown"`` |
+| spath input path output path default |  Extracts structured data with specific paths and default values | ``index=logs \| spath input=raw output=status_code path=code default="N/A"`` |
 
-49. **len**
-    - Description: Returns the length of a string field.
-    - Example: `index=logs | eval message_length = len(message)`
+<br/>
 
-50. **toupper tolower**
-    - Description: Converts string values to uppercase or lowercase.
-    - Example: `index=logs | eval uppercase_message = toupper(message)`
+## Conditional Transformations
 
----
+| Command | Description | Description |
+| ------- | ----------- | ----------- |
+| case() |  Performs conditional evaluations and returns values | ``index=logs \| eval priority = case(severity=="High", "Urgent", severity=="Medium", "Normal", true(), "Low")`` |
+| if() |  Returns different values based on a condition | ``index=logs \| eval alert_level = if(severity=="High", "Critical", "Normal")`` |
+| eval coalesce() |  Returns the first non-null value among arguments | ``index=logs \| eval important_info = coalesce(critical_message, warning_message, info_message)`` |
 
-### **Math Functions:**
+<br/>
 
-51. **round**
-    - Description: Rounds numeric values to the nearest whole number.
-    - Example: `index=metrics | eval rounded_value = round(value)`
+## Timechart and Chart Functions
 
-52. **abs**
-    - Description: Returns the absolute value of a number.
-    - Example: `index=metrics | eval absolute_value = abs(change)`
+| Command | Description | Description |
+| ------- | ----------- | ----------- |
+| timechart span |  Creates time-based charts with specified time spans | ``index=web_logs \| timechart span=1h sum(response_time)`` |
+| chart usenull |  Includes NULL values in chart visualizations | ``index=logs \| chart count by user usenull=f`` |
+| chart overlay |  Generates overlay charts based on fields | ``index=web_logs \| chart count over status by host`` |
+| chart span |  Creates span charts with time and non-time fields | ``index=events \| chart count by user span=1d`` |
+| chart stack |  Generates stacked charts based on fields | ``index=web_logs \| chart count stack by status`` |
+| chart bins |  Creates histogram-style charts with specified bin sizes | ``index=metrics \| chart count bins=10 by value`` |
 
-53. **sqrt**
-    - Description: Calculates the square root of a number.
-    - Example: `index=metrics | eval square_root = sqrt(number)`
+<br/>
 
-54. **power**
-    - Description: Raises a number to a specified power.
-    - Example: `index=metrics | eval squared_value = power(value, 2)`
+## Advanced Analysis and Correlation
 
-55. **log log10**
-    - Description: Computes the natural logarithm or base-10 logarithm.
-    - Example: `index=metrics | eval ln_value = log(value)`
+| Command | Description | Description |
+| ------- | ----------- | ----------- |
+| stats first last |  Retrieves the first and last values of fields | ``index=events \| stats first(_time) as first_event last(_time) as last_event by user`` |
+| eventstats |  Performs statistics calculations on events and adds results as new fields | ``index=transactions \| eventstats avg(amount) as avg_amount by user`` |
+| rare |  Identifies rare values in a field | ``index=errors \| rare error_code`` |
+| dedup |  Removes duplicate events based on specified fields | ``index=logs \| dedup user, ip_address`` |
+| multikv |  Extracts key-value pairs from fields | ``index=logs \| multikv fields key1, key2`` |
 
----
-
-### **Conditional Functions:**
-
-56. **if()**
-    - Description: Returns different values based on a condition.
-    - Example: `index=logs | eval status_type = if(status>=400, "Error", "Success")`
-
-57. **case()**
-    - Description: Evaluates a series of conditions and returns values accordingly.
-    - Example: `index=logs | eval severity_level = case(severity=="High", 3, severity=="Medium", 2, severity=="Low", 1)`
-
-58. **coalesce()**
-    - Description: Returns the first non-null value among arguments.
-    - Example: `index=logs | eval important_info = coalesce(critical_message, warning_message, info_message)`
-
----
-
-### **Logical Functions:**
-
-59. **and or not**
-    - Description: Performs logical AND, OR, and NOT operations.
-    - Example: `index=logs | eval is_error = (severity=="High" OR status>=500)`
-
-60. **eval like**
-    - Description: Matches field values with wildcard patterns.
-    - Example: `index=logs | eval is_error = like(message, "*error*")`
-
-61. **mvfilter**
-    - Description: Filters multivalue fields based on conditions.
-    - Example: `index=events | eval tags = mvfilter(tag, like(tag, "*critical*"))`
-
----
-
-### **Working with Multivalue Fields:**
-
-62. **mvexpand**
-    - Description: Expands multivalue fields into separate events.
-    - Example: `index=events | mvexpand tags`
-
-63. **mvzip mvappend mvcombine**
-    - Description: Manipulates multivalue fields.
-    - Example: `index=events | eval combined_fields = mvzip(field1, field2, ", ")`
-
-64. **mvcount**
-    - Description: Counts the number of values in a multivalue field.
-    - Example: `index=events | eval tag_count = mvcount(tags)`
-
-65. **mvfind**
-    - Description: Searches for values in a multivalue field.
-    - Example: `index=events | eval has_error = mvfind(tags, "error")`
-
----
-
-### **Numeric Functions:**
-
-66. **isnull isnotnull**
-    - Description: Checks if a field value is null or not null.
-    - Example: `index=metrics | eval missing_value = isnull(response_time)`
-
-67. **isnum**
-    - Description: Checks if a field value is a number.
-    - Example: `index=metrics | eval is_number = isnum(value)`
-
-68. **isbool**
-    - Description: Checks if a field value is a boolean.
-    - Example: `index=events | eval is_boolean = isbool(flag)`
-
-69. **mvjoin**
-   
-
- - Description: Joins multivalue fields into a single value using a separator.
-    - Example: `index=events | eval combined_tags = mvjoin(tags, ", ")`
-
----
-
-### **Time and Date Functions:**
-
-70. **now**
-    - Description: Returns the current date and time.
-    - Example: `index=logs | eval current_time = now()`
-
-71. **strptime strftime**
-    - Description: Converts between Unix timestamps and human-readable dates.
-    - Example: `index=logs | eval formatted_time = strftime(_time, "%Y-%m-%d %H:%M:%S")`
-
-72. **relative_time**
-    - Description: Calculates a relative time based on a unit and offset.
-    - Example: `index=logs earliest=relative_time(now(), "-1d@d")`
-
-73. **date_month date_wday**
-    - Description: Extracts month or day of the week from timestamps.
-    - Example: `index=logs | eval month = date_month(_time)`
-
-74. **now offset**
-    - Description: Returns the current time with an offset.
-    - Example: `index=logs | eval future_time = now() + 3600`
-
-75. **time**
-    - Description: Converts a string representation of time to a Unix timestamp.
-    - Example: `index=logs | eval event_time = time("2023-01-15 10:30:00")`
-
-76. **date_part**
-    - Description: Extracts specific components (year, month, day, etc.) from a timestamp.
-    - Example: `index=logs | eval year = date_part(_time, "year")`
-
----
-
-### **IP and Geolocation Functions:**
-
-77. **iplocation**
-    - Description: Retrieves geolocation information for IP addresses.
-    - Example: `index=logs | iplocation clientip`
-
-78. **cidrmatch**
-    - Description: Matches IP addresses against CIDR ranges.
-    - Example: `index=network_traffic | cidrmatch(ip, "192.168.0.0/24")`
-
-79. **isipv4 isipv6**
-    - Description: Checks if a field value is an IPv4 or IPv6 address.
-    - Example: `index=logs | eval is_ipv4 = isipv4(ip_address)`
-
-80. **maxmindisplocation**
-    - Description: Retrieves geolocation information from MaxMind databases.
-    - Example: `index=logs | maxmindisplocation ipfield=client_ip`
-
-81. **iptoname**
-    - Description: Maps IP addresses to domain names.
-    - Example: `index=network_traffic | eval hostname = iptoname(destination_ip)`
-
----
-
-### **Geospatial Functions:**
-
-82. **geostats**
-    - Description: Generates geospatial statistics and visualizations.
-    - Example: `index=locations | geostats count by city`
-
-83. **geodistance**
-    - Description: Calculates the distance between two sets of geographic coordinates.
-    - Example: `index=locations | eval distance_km = geodistance(lat1, lon1, lat2, lon2, "km")`
-
-84. **geobounds**
-    - Description: Calculates the bounding box of a set of geographic coordinates.
-    - Example: `index=locations | geobounds latfield=latitude lonfield=longitude`
-
-85. **geopoint**
-    - Description: Converts latitude and longitude to a geopoint field.
-    - Example: `index=locations | eval geopoint = geopoint(latitude, longitude)`
-
-86. **geom distance**
-    - Description: Calculates the distance between two geopoint fields.
-    - Example: `index=locations | eval distance_km = geom_distance(geopoint1, geopoint2, "km")`
-
----
-
-### **Advanced Transformations:**
-
-87. **spath**
-    - Description: Extracts structured data from fields containing JSON or XML.
-    - Example: `index=logs | spath input=raw output=uri path=uri`
-
-88. **spath output path**
-    - Description: Extracts specific paths from structured data as separate fields.
-    - Example: `index=logs | spath input=raw output=page path=uri`
-
-89. **spath output default**
-    - Description: Extracts structured data with default values if path is not found.
-    - Example: `index=logs | spath input=raw output=page path=uri default="Unknown"`
-
-90. **spath input path output path default**
-    - Description: Extracts structured data with specific paths and default values.
-    - Example: `index=logs | spath input=raw output=status_code path=code default="N/A"`
-
----
-
-### **Conditional Transformations:**
-
-91. **case()**
-    - Description: Performs conditional evaluations and returns values.
-    - Example: `index=logs | eval priority = case(severity=="High", "Urgent", severity=="Medium", "Normal", true(), "Low")`
-
-92. **if()**
-    - Description: Returns different values based on a condition.
-    - Example: `index=logs | eval alert_level = if(severity=="High", "Critical", "Normal")`
-
-93. **eval coalesce()**
-    - Description: Returns the first non-null value among arguments.
-    - Example: `index=logs | eval important_info =
-
- coalesce(critical_message, warning_message, info_message)`
-
----
-
-### **Timechart and Chart Functions:**
-
-94. **timechart span**
-    - Description: Creates time-based charts with specified time spans.
-    - Example: `index=web_logs | timechart span=1h sum(response_time)`
-
-95. **chart usenull**
-    - Description: Includes NULL values in chart visualizations.
-    - Example: `index=logs | chart count by user usenull=f`
-
-96. **chart overlay**
-    - Description: Generates overlay charts based on fields.
-    - Example: `index=web_logs | chart count over status by host`
-
-97. **chart span**
-    - Description: Creates span charts with time and non-time fields.
-    - Example: `index=events | chart count by user span=1d`
-
-98. **chart stack**
-    - Description: Generates stacked charts based on fields.
-    - Example: `index=web_logs | chart count stack by status`
-
-99. **chart bins**
-    - Description: Creates histogram-style charts with specified bin sizes.
-    - Example: `index=metrics | chart count bins=10 by value`
-
----
-
-### **Advanced Analysis and Correlation:**
-
-100. **stats first last**
-    - Description: Retrieves the first and last values of fields.
-    - Example: `index=events | stats first(_time) as first_event last(_time) as last_event by user`
-
-101. **eventstats**
-    - Description: Performs statistics calculations on events and adds results as new fields.
-    - Example: `index=transactions | eventstats avg(amount) as avg_amount by user`
-
-102. **rare**
-    - Description: Identifies rare values in a field.
-    - Example: `index=errors | rare error_code`
-
-103. **dedup**
-    - Description: Removes duplicate events based on specified fields.
-    - Example: `index=logs | dedup user, ip_address`
-
-104. **multikv**
-    - Description: Extracts key-value pairs from fields.
-    - Example: `index=logs | multikv fields key1, key2`
-
----
+<br/>
 
 Please note that these examples are simplified for demonstration purposes. Actual use cases might require more complex combinations of commands, functions, and field names. Replace `index`, `sourcetype`, field names, and values with your actual data and requirements. Splunk's real power comes from creatively combining these commands and functions to analyze and visualize data according to your specific use case.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
